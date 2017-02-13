@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { App, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
-
 import { ToDo } from '../pages/todo/todo';
 
 
@@ -11,9 +10,9 @@ import { ToDo } from '../pages/todo/todo';
 export class MyApp {
   rootPage = ToDo;
 
-  constructor(platform: Platform) {
+  constructor(platform: Platform, private app: App) {
     platform.ready().then(() => {
-      StatusBar.styleDefault();
+      StatusBar.hide();
       Splashscreen.hide();
     });
   }

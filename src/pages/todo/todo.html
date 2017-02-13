@@ -1,14 +1,47 @@
-<!-- Title Bar w/ Nav -->
-<ion-header>
-  <ion-navbar>
-    <ion-title text-center>
-      You've got stuff to do!
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-
 <!-- Main Content-->
-<ion-content padding>
+<ion-content>
+
+  <!-- Grid used for layout-->
+  <ion-grid>
+
+    <!-- Title -->
+    <ion-row text-center padding-bottom id="title">
+      <ion-col>
+        <h1 no-padding>Your To-Do List</h1>
+        <p>{{ completed }}/{{ total }} Complete!</p>
+      </ion-col>
+    </ion-row>
+
+    <!-- To-do Items -->
+    <ion-row id="items-list">
+      <ion-col>
+        <!-- List itself -->
+        <ion-list no-lines margin-top>
+          <!-- template for item -->
+          <ion-item *ngFor="let item of items" (click)="openDetails(item)">
+            <ion-checkbox [(ngModel)]="item.completed" color=blueish item-left></ion-checkbox>
+            <ion-label [style.text-decoration]="getTextDecoration(item.completed)">{{item.title}}</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <!-- List indicator-->
+    <ion-row id="indicator" text-center>
+      <ion-fab bottom left>
+        <button color="primary" ion-fab>
+         <ion-icon name="add"></ion-icon>
+      </button>
+      </ion-fab>
+      <ion-col>
+        <p>1 item remaining!</p>
+      </ion-col>
+    </ion-row>
+
+    <!-- FAB for Adding an item -->
+
+  </ion-grid>
+
 
 
 </ion-content>

@@ -1,3 +1,4 @@
+import { TodoDetail } from '../pages/todo-detail/todo-detail';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
@@ -6,7 +7,8 @@ import { ToDo } from '../pages/todo/todo';
 @NgModule({
   declarations: [
     MyApp,
-    ToDo
+    ToDo,
+    TodoDetail
   ],
   imports: [
     IonicModule.forRoot(MyApp)
