@@ -18,9 +18,9 @@
         <!-- List itself -->
         <ion-list no-lines margin-top>
           <!-- template for item -->
-          <ion-item *ngFor="let item of items" (click)="openDetails(item)">
-            <ion-checkbox [(ngModel)]="item.completed" color=blueish item-left></ion-checkbox>
-            <ion-label [style.text-decoration]="getTextDecoration(item.completed)">{{item.title}}</ion-label>
+          <ion-item *ngFor="let item of items">
+            <ion-checkbox [(ngModel)]="item.completed" (ngModelChange)="completedChanged(item)" color=blueish item-left></ion-checkbox>
+            <ion-label [style.text-decoration]="getTextDecoration(item.completed)" (click)="openDetails(item)">{{item.title}}</ion-label>
           </ion-item>
         </ion-list>
       </ion-col>
@@ -34,7 +34,7 @@
       </button>
       </ion-fab>
       <ion-col>
-        <p>1 item remaining!</p>
+        <p>{{ (total-completed) | number}} item remaining!</p>
       </ion-col>
     </ion-row>
 

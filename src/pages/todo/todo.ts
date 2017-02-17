@@ -7,7 +7,6 @@ import { Item } from '../../models/item';
   templateUrl: 'todo.html'
 })
 export class ToDo {
-
   private items: Item[] = [
     { "title": "Make Bed", "description": "Upon waking up in the morning, one must make the bed prior to leaving the bedroom for the day.", "completed": true },
     { "title": "Eat Breakfast", "description": "6 pieces of bacon, 2 breakfast sausages, 2 scrambled eggs, 2 pieces of toast with butter, and a large glass of milk.", "completed": false },
@@ -30,12 +29,11 @@ export class ToDo {
   removeItem(item: Item) {
 
   }
-
+  completedChanged(){
+    this.completed = this.getCompleted();
+  }
   // utility functions
   openDetails() {
-  }
-  getTextDecoration(truthy: boolean) {
-    return (truthy) ? "line-through" : "none";
   }
   getCompleted() {
     let counter: number = 0;
@@ -44,5 +42,8 @@ export class ToDo {
         counter++;
     }
     return counter;
+  }
+  getTextDecoration(truthy: boolean) {
+    return (truthy) ? "line-through" : "none";
   }
 }

@@ -5,9 +5,9 @@ ion-content{
 #title{
   height:10vh;
 }
-
-#items-list{
-}
 ion-icon{
   font-size:3.5rem !important;
+}
+ion-checkbox{
+  z-index: -1;
 }
