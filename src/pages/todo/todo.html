@@ -26,22 +26,19 @@
       </ion-col>
     </ion-row>
 
-    <!-- List indicator-->
+    <!-- Display # of items remaining -->
     <ion-row id="indicator" text-center>
-      <ion-fab bottom left>
-        <button color="primary" ion-fab>
-         <ion-icon name="add"></ion-icon>
-      </button>
-      </ion-fab>
       <ion-col>
-        <p>{{ (total-completed) | number}} item remaining!</p>
+        <p>{{ output }}</p>
       </ion-col>
     </ion-row>
 
-    <!-- FAB for Adding an item -->
-
+    <!-- Add new item - Floating Action Button -->
+    <ion-fab bottom left>
+      <button color="primary" (click)="addNew()" ion-fab>
+         <ion-icon name="add"></ion-icon>
+        </button>
+    </ion-fab>
   </ion-grid>
-
-
 
 </ion-content>

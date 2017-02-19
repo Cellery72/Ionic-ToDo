@@ -1,18 +1,44 @@
-<!--
-  Generated template for the TodoDetail page.
+<!-- Main Content-->
+<ion-content>
+  <!-- Grid used for layout-->
+  <ion-grid>
+    <!-- Informational Title -->
+    <ion-row text-center padding id="title">
+      <ion-col>
+        <h1 no-padding>Item Details</h1>
+        <p>Started February 19th 2017</p>
+      </ion-col>
+    </ion-row>
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
+    <!-- Item Title -->
+    <ion-row padding-top margin-top>
+      <ion-col width-90 offset-5>
+        <ion-list no-lines>
+          <ion-item no-lines>
+            <ion-label>To-Do Item:</ion-label>
+            <ion-input text-right placeholder="What do you have to do?" [(ngModel)]="item.title"></ion-input>
+          </ion-item>
+          <ion-item no-lines>
+            <ion-checkbox item-right (click)="completedChanged(item)" (ngModelChange)="completedChanged(item)" [(ngModel)]="item.completed" color=blueish></ion-checkbox>
+            <ion-label>Are you done?</ion-label>
+          </ion-item>
+          <ion-item no-lines>
+            <ion-label floating>Description</ion-label>
+            <ion-textarea text-wrap fz-elastic [(ngModel)]="item.description"></ion-textarea>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
 
-  <ion-navbar>
-    <ion-title>todo-detail</ion-title>
-  </ion-navbar>
-
-</ion-header>
 
 
-<ion-content padding>
+    <!-- Add new item - Floating Action Button -->
+    <ion-fab bottom left>
+      <button color="primary" (click)="goBack()" ion-fab>
+         <ion-icon name="add"></ion-icon>
+        </button>
+    </ion-fab>
+
+  </ion-grid>
 
 </ion-content>

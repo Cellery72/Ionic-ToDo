@@ -1,13 +1,24 @@
+import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Item } from '../../models/item';
 
 @Component({
-  selector: 'page-todo-detail',
+  selector: 'todo-detail',
   templateUrl: 'todo-detail.html'
 })
 export class TodoDetail {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  private item: Item;
 
+  constructor(public viewCtrl: ViewController, public navCtrl: NavController, navParams: NavParams) {
+    if(navParams.data!=null)
+      this.item = navParams.data;
+   }
 
+  goBack(){
+    this.navCtrl.pop();
+  }
+  completedChanged(item: Item){
+    console.log(item);
+  }
 }
