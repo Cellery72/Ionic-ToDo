@@ -1,6 +1,6 @@
 import { TodoDetail } from '../todo-detail/todo-detail';
 import { Component } from '@angular/core';
-import { NavController} from 'ionic-angular';
+import { Events, NavController } from 'ionic-angular';
 import { Item } from '../../models/item';
 
 @Component({
@@ -8,27 +8,52 @@ import { Item } from '../../models/item';
   templateUrl: 'todo.html'
 })
 export class ToDo {
-  private items: Item[] = [
-    { "id":1001, "title":"Make Bed", "description": "Upon waking up in the morning, one must make the bed prior to leaving the bedroom for the day.", "completed": true },
-    { "id":1002, "title": "Eat Breakfast", "description": "6 pieces of bacon, 2 breakfast sausages, 2 scrambled eggs, 2 pieces of toast with butter, and a large glass of milk.", "completed": false },
-    { "id":1003, "title": "Feed Dog", "description": "You had your breakfast, why wouldn't the dog want his?", "completed": true },
-    { "id":1004, "title": "Brush Teeth", "description": "Brush your teeth young man", "completed": true }
-  ];
+  private items: Item[] =
+  [new Item("Eat Breakfast", "6 pieces of bacon, 2 breakfast sausages, 2 scrambled eggs, 2 pieces of toast with butter, and a large glass of milk.", false),
+  new Item("Make Bed", "Upon waking up in the morning, one must make the bed prior to leaving the bedroom for the day.", true),
+  new Item("Brush Teeth", "Brush your teeth young man", true),
+  new Item("Feed Dog", "You had your breakfast, why wouldn't the dog want his?", true)];
+
   private completed: number;
   private total: number;
   private output: string;
 
   // default constructor
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public events: Events) {
+
+
     this.total = this.items.length;
     this.completed = this.getCompleted();
     this.output = this.generateOutput();
+
+    events.subscribe('item:added', (item) => {
+      this.items.push(item);
+
+      this.total = this.items.length;
+      this.completed = this.getCompleted();
+      this.output = this.generateOutput();
+
+    });
+    events.subscribe('item:removed', (item) => {
+      let index = this.items.indexOf(item);
+      this.items.splice(index, 1);
+
+      this.total = this.items.length;
+      this.completed = this.getCompleted();
+      this.output = this.generateOutput();
+    });
+    events.subscribe('item:updated', (item) => {
+
+    });
   }
 
   // CRUD functions
   // ****************
   addNew() {
-    this.navCtrl.push(TodoDetail);
+    this.navCtrl.push(TodoDetail, {
+      currentItem: new Item("", "", false),
+      newItem: true
+    });
   }
   removeItem(item: Item) {
   }
@@ -40,10 +65,15 @@ export class ToDo {
     this.output = this.generateOutput();
   }
 
+
   // utility functions
   // *****************
   openDetails(item: Item) {
-    this.navCtrl.push(TodoDetail, item);
+
+    this.navCtrl.push(TodoDetail, {
+      currentItem: item,
+      newItem: false
+    });
 
   }
   getCompleted() {

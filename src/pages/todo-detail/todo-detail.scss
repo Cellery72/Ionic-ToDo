@@ -2,3 +2,9 @@
   border-bottom-color: transparent !important;
   box-shadow: none !important;
 }
+.alert-message{
+    overflow: hidden;
+}
+#completion{
+  z-index: 99;
+}

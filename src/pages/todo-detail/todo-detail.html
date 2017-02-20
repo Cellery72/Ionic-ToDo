@@ -6,39 +6,76 @@
     <ion-row text-center padding id="title">
       <ion-col>
         <h1 no-padding>Item Details</h1>
-        <p>Started February 19th 2017</p>
+        <p>{{item._startString}}</p>
       </ion-col>
     </ion-row>
 
-    <!-- Item Title -->
+    <!-- Item Information -->
     <ion-row padding-top margin-top>
       <ion-col width-90 offset-5>
         <ion-list no-lines>
           <ion-item no-lines>
             <ion-label>To-Do Item:</ion-label>
-            <ion-input text-right placeholder="What do you have to do?" [(ngModel)]="item.title"></ion-input>
+            <ion-input (ngOnChanges)="completedChanged($event)" text-right placeholder="What do you have to do?" [(ngModel)]="item.title"></ion-input>
           </ion-item>
           <ion-item no-lines>
-            <ion-checkbox item-right (click)="completedChanged(item)" (ngModelChange)="completedChanged(item)" [(ngModel)]="item.completed" color=blueish></ion-checkbox>
+            <ion-checkbox (click)="completedChanged($event)" id="completion" item-right [(ngModel)]="item.completed" color=blueish></ion-checkbox>
             <ion-label>Are you done?</ion-label>
           </ion-item>
           <ion-item no-lines>
             <ion-label floating>Description</ion-label>
-            <ion-textarea text-wrap fz-elastic [(ngModel)]="item.description"></ion-textarea>
+            <ion-textarea (ngOnChanges)="completedChanged($event)" text-wrap fz-elastic [(ngModel)]="item.description"></ion-textarea>
           </ion-item>
         </ion-list>
       </ion-col>
     </ion-row>
 
 
-
-    <!-- Add new item - Floating Action Button -->
-    <ion-fab bottom left>
-      <button color="primary" (click)="goBack()" ion-fab>
-         <ion-icon name="add"></ion-icon>
+    <!--  ************* Adding New Item ************** -->
+    <!--  ******************************************** -->
+    <div *ngIf="newItem">
+      <!-- Save Item - Floating Action Button -->
+      <ion-fab bottom left>
+        <button color="primary" (click)="addItem()" ion-fab>
+         <ion-icon name="checkmark"></ion-icon>
         </button>
-    </ion-fab>
+      </ion-fab>
+      <!-- Delete Item - Floating Action Button -->
+      <ion-fab bottom right>
+        <button color="secondary" (click)="goBack()" ion-fab>
+         <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-fab>
+
+    </div>
+
+
+
+
+    <!--  ************ Editing an Item *************** -->
+    <!--  ******************************************** -->
+    <div *ngIf="!newItem">
+      <!-- Back Button - Floating Action Button -->
+      <ion-fab bottom left>
+        <button color="blueish" (click)="goBack()" ion-fab>
+         <ion-icon name="arrow-back"></ion-icon>
+        </button>
+      </ion-fab>
+
+      <!-- Save Item - Floating Action Button -->
+      <ion-fab bottom center [hidden]="!changed">
+        <button color="primary" (click)="saveItem()" ion-fab>
+         <ion-icon name="checkmark"></ion-icon>
+        </button>
+      </ion-fab>
+
+      <!-- Delete Item - Floating Action Button -->
+      <ion-fab bottom right>
+        <button color="secondary" (click)="deleteItem()" ion-fab>
+         <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-fab>
+    </div>
 
   </ion-grid>
-
 </ion-content>
