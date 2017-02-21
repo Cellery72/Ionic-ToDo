@@ -16,7 +16,7 @@
         <ion-list no-lines>
           <ion-item no-lines>
             <ion-label>To-Do Item:</ion-label>
-            <ion-input (ngOnChanges)="completedChanged($event)" text-right placeholder="What do you have to do?" [(ngModel)]="item.title"></ion-input>
+            <ion-input text-right placeholder="What do you have to do?" (ngModelChanges)="item = $event" [(ngModel)]="item.title"></ion-input>
           </ion-item>
           <ion-item no-lines>
             <ion-checkbox (click)="completedChanged($event)" id="completion" item-right [(ngModel)]="item.completed" color=blueish></ion-checkbox>
@@ -24,7 +24,7 @@
           </ion-item>
           <ion-item no-lines>
             <ion-label floating>Description</ion-label>
-            <ion-textarea (ngOnChanges)="completedChanged($event)" text-wrap fz-elastic [(ngModel)]="item.description"></ion-textarea>
+            <ion-textarea text-wrap fz-elastic  [(ngModel)]="item.description"></ion-textarea>
           </ion-item>
         </ion-list>
       </ion-col>
@@ -48,8 +48,6 @@
       </ion-fab>
 
     </div>
-
-
 
 
     <!--  ************ Editing an Item *************** -->

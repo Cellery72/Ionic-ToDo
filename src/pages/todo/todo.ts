@@ -93,7 +93,10 @@ export class ToDo {
     let output: string;
     let remaining: number = this.total - this.completed;
 
-    if (this.total == 0 || remaining == 0) {
+
+    if (this.total == 0) {
+      output = "Add some items to get working on!";
+    } else if (remaining == 0) {
       output = "Congrats my dude, you're done!";
     }
     else {

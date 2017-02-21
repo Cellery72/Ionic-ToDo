@@ -5,14 +5,16 @@ export class Item {
   public completed: boolean;
   public _startString: string;
 
+  // Default constructor will initialize a start string from the current time it's constructed.
   constructor(title: string, description: string, completed: boolean) {
+    let creationTime = new Date();
     this.completed = completed;
     this.title = title;
     this.description = description;
-    let creationTime = new Date();
     this._startString = "Started " + this.getMonthName(creationTime.getMonth()) + " " + this.getNth(creationTime.getDate()) + " " + creationTime.getFullYear() + " " + creationTime.toLocaleTimeString();
   }
 
+  // Returns string of the month(name) given a number (0-11)
   private getMonthName(month: number) {
     switch (month) {
       case 0:
@@ -41,6 +43,7 @@ export class Item {
         return "December";
     }
   }
+  // Returns string with appropriate 'st' 'nd' 'rd' 'th' etc. concatanated with number
   private getNth(dayNumber: number) {
     let j = dayNumber % 10,
       k = dayNumber % 100;

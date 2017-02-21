@@ -1,14 +1,14 @@
 import { Events, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Item } from '../../models/item';
 
 @Component({
   selector: 'todo-detail',
   templateUrl: 'todo-detail.html'
 })
-export class TodoDetail {
+export class TodoDetail implements OnChanges {
 
-  private item: Item;
+  @Input() item: Item;
   private newItem: boolean;
   private changed: boolean = false;
   private initialTitle: string;
@@ -78,9 +78,14 @@ export class TodoDetail {
     this.navCtrl.pop();
   }
 
+  ngOnChanges(changes: SimpleChanges) : void {
+    console.log(changes);
+  }
   // Events
   completedChanged(event) {
     this.changed = this.compare(this.item);
+    console.log(this.item);
+    console.log(this.compare(this.item));
   }
 
   // Navigation
