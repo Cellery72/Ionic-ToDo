@@ -1,5 +1,8 @@
+let counter = 1001;
+
 export class Item {
 
+  private _id: number;
   public title: string;
   public description: string;
   public completed: boolean;
@@ -11,6 +14,7 @@ export class Item {
     this.completed = completed;
     this.title = title;
     this.description = description;
+    this._id = counter++;
     this._startString = "Started " + this.getMonthName(creationTime.getMonth()) + " " + this.getNth(creationTime.getDate()) + " " + creationTime.getFullYear() + " " + creationTime.toLocaleTimeString();
   }
 
@@ -57,5 +61,8 @@ export class Item {
       return dayNumber + "rd";
     }
     return dayNumber + "th";
+  }
+  public getID(): number{
+    return this._id;
   }
 }

@@ -8,6 +8,9 @@ import { Item } from '../../models/item';
   templateUrl: 'todo.html'
 })
 export class ToDo {
+
+
+
   private items: Item[] =
   [new Item("Eat Breakfast", "6 pieces of bacon, 2 breakfast sausages, 2 scrambled eggs, 2 pieces of toast with butter, and a large glass of milk.", false),
   new Item("Make Bed", "Upon waking up in the morning, one must make the bed prior to leaving the bedroom for the day.", true),
@@ -26,7 +29,7 @@ export class ToDo {
     this.completed = this.getCompleted();
     this.output = this.generateOutput();
 
-    events.subscribe('item:added', (item) => {
+    events.subscribe('item:added', (item: Item) => {
       this.items.push(item);
 
       this.total = this.items.length;
@@ -34,7 +37,7 @@ export class ToDo {
       this.output = this.generateOutput();
 
     });
-    events.subscribe('item:removed', (item) => {
+    events.subscribe('item:removed', (item: Item) => {
       let index = this.items.indexOf(item);
       this.items.splice(index, 1);
 
@@ -42,8 +45,11 @@ export class ToDo {
       this.completed = this.getCompleted();
       this.output = this.generateOutput();
     });
-    events.subscribe('item:updated', (item) => {
-
+    events.subscribe('item:updated', (item: Item) => {
+      let id = item.getID();
+      let tempItem = this.items.filter(it => it.getID() === id);
+      console.log(tempItem);
+      console.log(this.items);
     });
   }
 
